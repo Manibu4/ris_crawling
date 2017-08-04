@@ -1,0 +1,280 @@
+/*
+  ========================================
+  Clearfix
+  ========================================
+*/
+
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  clear: both;
+  *zoom: 1;
+}
+
+/*
+  ========================================
+  Grid
+  ========================================
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+body {
+  background: #c8f3f3;/*dunkli Farb obe und unte*/
+  font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*
+  ========================================
+  Primary header
+  ========================================
+*/
+
+.logoleft {
+  float: left;
+  font-size: 48px;
+  line-height: 44px;
+  padding: 40px 0 22px 0;
+}
+.logoright {
+  float: right;
+  font-size: 22px;
+  line-height: 44px;
+  padding: 40px 0 5px 0;
+}
+
+/*
+  ========================================
+  Grid
+  ========================================
+*/
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+.container,
+.grid {
+  margin: 0 auto;
+  width: 80%;
+}
+
+/*.grid {
+  display: inline-block;
+}*/
+
+/*
+  ========================================
+  Rows
+  ========================================
+*/
+
+.row {
+  min-width: 80%; /* Wenns das unterschrittet, denn chunnt unte e Balke...*/
+  background: #fff; /*helle Hintergrund*/
+  padding: 66px 0 44px 0;
+}
+
+/*
+  ========================================
+  Typography
+  ========================================
+*/
+
+h1, h3, h4 {
+  color: #000; /*Farb vo Titel*/
+}
+h1, h3, h4, h5, p {
+  margin-bottom: 22px;
+}
+h1 {
+  font-size: 36px;
+  line-height: 44px;
+}
+h2 {
+  color: #000;
+  font-size: 24px;
+  line-height: 44px;
+}
+h3 {
+  font-size: 21px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+strong {
+  font-weight: 400;
+}
+cite,
+em {
+  background-color: yellow;
+}
+
+/*
+  ========================================
+  Links
+  ========================================
+*/
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+.primary-header a,
+.primary-footer a {
+  color: #000;
+}
+.primary-header a:hover,
+.primary-footer a:hover,
+a:hover {
+  color: #e60000;
+  cursor: pointer;
+}
+
+.logo a {
+  color: #000;
+}
+.logo a:hover {
+  color: #fff;
+}
+
+
+form {
+  margin-bottom: 22px;
+}
+input,
+select,
+textarea {
+  font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.input-table {
+  width: 70%;
+  margin: 20px 0 0 0;
+}
+
+.large-input,
+.small-input,
+.date-input {
+  border-style: solid;
+  border-color: #b4e0e0;
+  height: 35px;
+  border-radius: 5px;
+  margin: 0 0 12px 0;
+}
+
+.large-input {
+  width: 70%;
+}
+
+.small-input {
+  width: 60%;
+}
+
+.date-input {
+  width: 40%;
+}
+
+th,
+.res td {
+  padding: 8px 5px 8px 15px;
+  text-align: left;
+}
+
+.res thead {
+  background: #c8f3f3;
+}
+
+/*
+  ========================================
+  Buttons
+  ========================================
+*/
+
+.btn {
+  height: 35px;
+  width: 70px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #b4e0e0;
+  color: #000;
+  cursor: pointer;
+  display: inline-block;
+  letter-spacing: .5px;
+  background: #c8f3f3;
+  padding: 2px 10px;
+}
+
+.btn:hover {
+  background: #b4e0e0;
+}
+
+.card {
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  padding: 5px 10px 5px 5px;
+  width: 100%;
+  box-shadow: 0 1px 3px 1px rgba(0,0,0,0.12), 0 1px 2px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card:hover {
+  box-shadow: 0 14px 28px 5px rgba(0,0,0,0.25), 0 10px 10px 5px rgba(0,0,0,0.22);
+}
+
+input[type="checkbox"] {
+  margin: 0 8px 10px 15px;
+}

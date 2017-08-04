@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<head>
+  <title>RIS Crawler</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='assets/stylesheet/main.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css"/>
+</head>
+
+<body class="sans-serif">
+    <header class="primary-header container group">
+        <h1 class="logoleft fw5 lh-title" ><a href="/">Ris Crawler</a></h1>
+        <h1 class="logoright fw4"> <img src="{{url_for('static', filename='logo.png') }}" style="width:300px" alt="Logo"> <br> Klinik für Radiologie und Nuklearmedizin</h1>
+    </header>
+    <section class="row">
+        <div class="grid f4">
+        <h2>Ihre Suche nach "{{search_word}}" hat {{num_of_results}} Resultate ergeben: </h2><br>
+        {% for item in items %}
+        <table class="card res f5">
+            <thead> {% if item["unters_beginn"] and item["befund_schluessel"]%} <tr>
+                <td colspan="2" class="fw4"> Untersuchung vom {{item["unters_beginn"]}} ({{item["unters_schluessel"]}})</td>
+                </tr> {% endif %}
+            </thead>
+            <tbody>
+                {% if item["fragestellung"] %} <tr>
+                <td>  Fragestellung: </td>
+                <td> {{item["fragestellung"] | safe}} </td>
+                </tr> {% endif %}
+                
+                {% if item["anamnese"] %} <tr>
+                <td> Anamnese:  </td>
+                <td> {{item["anamnese"] | safe}} </td>
+                </tr> {% endif %}
+
+                {% if item["technik"] %} <tr>
+                <td> Technik:  </td>
+                <td> {{item["technik"] | safe}} </td>
+                </tr> {% endif %}
+
+                {% if item["befund"] %} <tr>
+                <td> Befund:  </td>
+                <td>  {{ item["befund"] | safe}} </td>
+                </tr> {% endif %}
+
+                {% if item["beurteilung"] %} <tr>
+                <td> Beurteilung:  </td>
+                <td> {{item["beurteilung"] | safe}} </td>
+                </tr> {% endif %}
+                
+            </tbody>
+        </table><br><br>
+        {% endfor %}
+        </div>
+    </section>
+</body>
+</html>

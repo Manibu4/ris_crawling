@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+
+<head>
+  <title>RIS Crawler</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='assets/stylesheet/main.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css"/>
+
+<style>
+.drop_it {
+    display: none;
+}
+.show {display:block;}
+</style>
+
+</head>
+
+<body class="sans-serif">
+    <header class="primary-header container group">
+        <h1 class="logoleft fw5 lh-title" ><a href="/">Ris Crawler</a></h1>
+        <h1 class="logoright fw4"> <img src="{{url_for('static', filename='logo.png') }}" style="width:300px" alt="Logo"> <br> Klinik für Radiologie und Nuklearmedizin</h1>
+    </header>
+    <section class="row">
+        <div class="grid">
+            <form name="search_form" action="/show_results" method="post">
+                <label>
+                <input class="large-input" type="text" name="report" value="*:*">
+                <input class="btn" value="Suche" type="submit"></label><br>
+            <a class="fw5" id="manuBtn">Weitere Suchfelder</a>
+            <div id="manuDown" class="drop_it">
+            <table class="input-table">
+                <tr>
+                    <td>Befund</td> <td> <input class="small-input" type="text" name="result"></td>
+                    <td>Anamnese</td> <td> <input class="small-input" type="text" name="anamnesis"></td>
+                </tr>
+                <tr>
+                    <td>Beurteilung</td> <td> <input class="small-input" type="text" name="evaluation"></td>
+                    <td>Fragestellung</td> <td> <input class="small-input" type="text" name="problem"></td>
+                </tr>
+                <tr>
+                    <td> Technik </td> <td>
+                        <table>
+                            <tr><td> <input type="checkbox" name="technik" value="MR"><label>MR</label> </td>
+                                <td> <input type="checkbox" name="technik" value="CT"><label>CT</label> </td>
+                                <td> <input type="checkbox" name="technik" value="PT"><label>PT</label> </td>
+                                <td> <input type="checkbox" name="technik" value="CR"><label>CR</label> </td> </tr>
+                            <tr><td> <input type="checkbox" name="technik" value="XA"><label>XA</label> </td>
+                                <td> <input type="checkbox" name="technik" value="SR"><label>SR</label> </td>
+                                <td> <input type="checkbox" name="technik" value="NM"><label>NM</label> </td>
+                                <td> <input type="checkbox" name="technik" value="MG"><label>MG</label> </td> </tr>
+                            <tr><td> <input type="checkbox" name="technik" value="US"><label>US</label> </td>
+                                <td> <input type="checkbox" name="technik" value="DX"><label>DX</label> </td>
+                                <td> <input type="checkbox" name="technik" value="RF"><label>RF</label> </td>
+                                <td> <input type="checkbox" name="technik" value="OT"><label>OT</label> </td> </tr>
+                            <tr><td> <input type="checkbox" name="technik" value="PR"><label>PR</label> </td>
+                                <td> <input type="checkbox" name="technik" value="KO"><label>KO</label> </td>
+                                <td> <input type="checkbox" name="technik" value="SC"><label>SC</label> </td>
+                                <td> <input type="checkbox" name="technik" value="SD"><label>SD</label> </td> </tr>
+                        </table> </td>
+                </tr>
+                <tr>
+                    <td>Datum Start</td> <td> <input class="date-input" type="date" /
+                        pattern="[0-9]{2}.[0-9]{2}.[0-9]{4}" name="sdate" style="margin-top:15px;"></td>
+                </tr>
+                <tr>
+                    <td>Datum Ende</td> <td> <input class="date-input" type="date" /
+                        pattern="[0-9]{2}.[0-9]{2}.[0-9]{4}" name="edate"></td>
+                </tr>
+            </table>
+            <input class="btn" value="Suche" type="submit">
+            </form>
+       
+        </div>
+        <!-- <div id="more_inputs" class="grid collapse">Blu blu</div> -->
+    </section>
+<script>
+// Get the button, and when the user clicks on it, execute myFunction
+document.getElementById("manuBtn").onclick = function() {manuFunction()};
+
+/* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
+function manuFunction() {
+    document.getElementById("manuDown").classList.toggle("show");
+}
+</script>
+</body>
+</html>
