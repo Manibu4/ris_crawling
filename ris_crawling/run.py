@@ -2,10 +2,25 @@
     and all the routines including some html file.
 """
 
-from flask import Flask, request, redirect, url_for, render_template
-from ris_crawling.ris_functions import test_query, format_text
+import datetime
+from flask import Flask, request, render_template
+from ris_crawling.ris_functions import test_query
+from ris_crawling.down_and_upload import fetch_one_ris_file, upload_to_solr, get_list_for_upload
 
 blu = Flask(__name__)
+
+# 1) If necessary, check for defective files and fetch them again
+# -> will overwrite files
+# get_failed_files()
+# get_list_for_upload()
+
+# # # 3) Routine for the daily upload
+# date = datetime.datetime.now() - datetime.timedelta(days=2)
+# day = date.strftime("%Y-%m-%d")
+# print('parsing ' + day)
+# day = fetch_one_ris_file(day)
+# path = '/Users/manu/Documents/Github/ris_crawling/json_files/'
+# upload_to_solr([day], path)
 
 @blu.route('/')
 def main():
@@ -29,7 +44,6 @@ def show_results():
     sdate = request.form["sdate"]
     edate = request.form["edate"]
     modality = request.form.getlist("technik")
-
     if report_dn:
         report = report_dn
     else:
@@ -37,8 +51,5 @@ def show_results():
 
     response = test_query(report, anamnesis, evaluation, problem, sdate, edate, modality)
     dicts = response['response']
-    # highlighted_dicts = response['highlighting']
-    # print(highlighted_dicts)
     dict_of_docs = dicts['docs']
-    # dict_of_docs = format_text(dict_of_docs, highlighted_dicts)
     return render_template('results.html', items=dict_of_docs, search_word=report, num_of_results=len(dict_of_docs))

@@ -103,3 +103,5 @@ ENV/
 .DS_Store
 *.json
 schema
+json_files
+nohup.out
