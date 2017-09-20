@@ -1,9 +1,5 @@
 """ Helper functions to crawl """
 
-# from urllib2 import *
-import urllib
-import json
-import os
 import requests
 
 def test_query(q_in, anamnesis, evaluation, problem, sdate, edate, modality):
@@ -12,7 +8,7 @@ def test_query(q_in, anamnesis, evaluation, problem, sdate, edate, modality):
     """ blu
     """
     core = 'http://localhost:8983/solr/ris_crawler/select?'
-    rows_in = '50'
+    rows_in = '1'
     rows_out = '&rows=' + rows_in
     if q_in != '*:*':
         q_out = '&q=*' + q_in + '*'
@@ -42,6 +38,12 @@ def test_query(q_in, anamnesis, evaluation, problem, sdate, edate, modality):
     go_for_it = core + '&wt=json' + q_out + rows_out + filter_query
     # go_for_it = core + q_out + '&wt=json'
     print(go_for_it)
+    res = requests.get(go_for_it)
+    response = res.json()
+    dicts = response['response']
+    rows_in = dicts['numFound']
+    rows_out = '&rows=' + str(rows_in)
+    go_for_it = core + '&wt=json' + q_out + rows_out + filter_query
     res = requests.get(go_for_it)
     response = res.json()
     return response

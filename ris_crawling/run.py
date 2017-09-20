@@ -3,6 +3,7 @@
 """
 
 import datetime
+from threading import Timer
 from flask import Flask, request, render_template
 from ris_crawling.ris_functions import test_query
 from ris_crawling.down_and_upload import fetch_one_ris_file, upload_to_solr, get_list_for_upload
@@ -12,15 +13,30 @@ blu = Flask(__name__)
 # 1) If necessary, check for defective files and fetch them again
 # -> will overwrite files
 # get_failed_files()
-# get_list_for_upload()
 
-# # # 3) Routine for the daily upload
-# date = datetime.datetime.now() - datetime.timedelta(days=2)
-# day = date.strftime("%Y-%m-%d")
-# print('parsing ' + day)
-# day = fetch_one_ris_file(day)
-# path = '/Users/manu/Documents/Github/ris_crawling/json_files/'
-# upload_to_solr([day], path)
+def daily_up():
+    """ Fetch one ris file, upload it to solr and move it to the
+        appropriate folder
+    """
+    # Routine for the daily upload
+    date = datetime.datetime.now() - datetime.timedelta(days=4)
+    day = date.strftime("%Y-%m-%d")
+    print('parsing ' + day)
+    day = fetch_one_ris_file(day)
+    print('parsing ' + day)
+    path = '/Users/manu/Documents/Github/ris_crawling/json_files/'
+    upload_to_solr([day], path)
+    print("tadaa")
+
+the_now = datetime.datetime.today()
+update_time = the_now.replace(day=the_now.day+1, hour=13, minute=57, second=30, microsecond=0)
+delta_t = update_time-the_now
+secs = delta_t.seconds + 1
+print(secs, "seconds remaining to ris update")
+
+t = Timer(secs, daily_up)
+t.start()
+
 
 @blu.route('/')
 def main():

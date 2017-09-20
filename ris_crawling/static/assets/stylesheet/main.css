@@ -278,3 +278,21 @@ th,
 input[type="checkbox"] {
   margin: 0 8px 10px 15px;
 }
+
+.pagination a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination a.active {
+    background-color: #c8f3f3;
+    color: black;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.align {
+    text-align: right;
+}

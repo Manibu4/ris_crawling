@@ -14,7 +14,17 @@
     </header>
     <section class="row">
         <div class="grid f4">
-        <h2>Ihre Suche nach "{{search_word}}" hat {{num_of_results}} Resultate ergeben: </h2><br>
+        <h2>Ihre Suche nach "{{search_word}}" hat {{num_of_results}} Resultate ergeben:</h2>
+        <div class="pagination f4 align">
+            <a href="#">&laquo;</a>
+            <a class="active" href="#" data-offset="100">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">&raquo;</a>
+        </div><br>
         {% for item in items %}
         <table class="card res f5">
             <thead> {% if item["unters_beginn"] and item["befund_schluessel"]%} <tr>

@@ -3,7 +3,7 @@
 """
 
 import datetime
-import urllib
+import requests
 import os
 from os import walk
 
@@ -20,9 +20,9 @@ def download_ris_files(start_date, end_date):
     while placeholder != end_date:
         date = date + delta
         placeholder = date.strftime("%Y-%m-%d")
-        print 'parsing ' + placeholder
+        print('parsing ' + placeholder)
         fetch_one_ris_file(placeholder)
-
+        
 
 def fetch_one_ris_file(one_day):
     """ This function fetches one ris report for the day given as input
@@ -30,8 +30,8 @@ def fetch_one_ris_file(one_day):
     """
     filename = one_day + '-parsed.json'
     url = 'http://meqpacscrllt01.uhbs.ch:9000/q?day=' + one_day
-    response = urllib.urlopen(url)
-    data = response.read()
+    response = requests.get(url)
+    data = response.text
     file_path = 'json_files/' + filename
 
     if not os.path.exists(os.path.dirname(file_path)):
@@ -49,6 +49,7 @@ def get_list_for_upload():
     my_path = '/Users/manu/Documents/Github/ris_crawling/json_files/'
     list_of_json_files = []
     for (_, _, filenames) in walk(my_path):
+        
         list_of_json_files.extend(filenames)
 
     upload_to_solr(list_of_json_files, my_path)
@@ -64,8 +65,8 @@ def upload_to_solr(list_of_json_files, path):
     appendix = '&stream.contentType=text/plain;charset=utf-8'
     for one_file in list_of_json_files:
         go_for_it = url + path + one_file + appendix
-        urllib.urlopen(go_for_it)
-        print path + one_file
+        requests.get(go_for_it)
+        print(path + one_file)
         os.rename(path + one_file, path + 'up/'+ one_file)
 
 
@@ -80,9 +81,9 @@ def get_failed_files():
             name = path + one_file
             size = os.path.getsize(name)
             if size < 200:
-                print one_file
+                print(one_file)
                 failed.append(one_file[0:10])
 
     for element in failed:
         fetch_one_ris_file(element)
-        print 'parsed ' + element
+        print('parsed ' + element)
